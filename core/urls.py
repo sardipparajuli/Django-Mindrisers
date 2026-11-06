@@ -7,4 +7,6 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('tasks/', views.todolist, name='todolist'),
     path('create/', views.create, name='create'),
+    path('complete/<int:id>/', views.mark_complete, name='mark_complete'),
+    path('edit/<int:id>/', views.edit, name='edit'),
 ]

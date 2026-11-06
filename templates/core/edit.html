@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Edit Task{% endblock %}
+
+{% block content %}
+    <h1>Edit Task</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            <label>Title:</label><br>
+            <input type="text" name="title" value="{{ task.title }}" required>
+        </p>
+        <p>
+            <label>Description:</label><br>
+            <textarea name="description" rows="4" cols="40">{{ task.description|default_if_none:'' }}</textarea>
+        </p>
+        <button type="submit">Update</button>
+        <a href="{% url 'todolist' %}">Cancel</a>
+    </form>
+{% endblock %}

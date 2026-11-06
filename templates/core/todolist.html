@@ -13,6 +13,12 @@
                 {% if task.is_completed %}(done){% else %}(pending){% endif %}
                 <br>
                 {{ task.description|default:"No description" }}
+                <br>
+                <a href="{% url 'mark_complete' task.id %}">
+                    {% if task.is_completed %}Mark incomplete{% else %}Mark complete{% endif %}
+                </a>
+                |
+                <a href="{% url 'edit' task.id %}">Edit</a>
             </li>
         {% empty %}
             <li>No tasks yet. <a href="{% url 'create' %}">Add one</a>.</li>

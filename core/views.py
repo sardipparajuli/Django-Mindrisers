@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Todolist
 
 
@@ -33,3 +33,23 @@ def create(request):
         Todolist.objects.create(title=title, description=description)
         return redirect('todolist')
     return render(request, 'core/create.html')
+
+
+def mark_complete(request, id):
+    task = get_object_or_404(Todolist, id=id)
+    # if is_completed is True -> False and if is_completed is False -> True
+    task.is_completed = not task.is_completed
+    task.save()
+    return redirect('todolist')
+
+
+def edit(request, id):
+    task = get_object_or_404(Todolist, id=id)
+    if request.method == 'POST':
+        task.title = request.POST.get('title')
+        task.description = request.POST.get('description')
+        task.save()
+        return redirect('todolist')
+
+    context = {'task': task}
+    return render(request, 'core/edit.html', context)
