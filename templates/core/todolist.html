@@ -23,11 +23,15 @@
                     <br>
                     <small class="text-muted">{{ task.description|default:"No description" }}</small>
                 </div>
-                <div>
+                <div class="d-flex gap-1">
                     <a class="btn btn-sm btn-outline-success" href="{% url 'mark_complete' task.id %}">
                         {% if task.is_completed %}Mark incomplete{% else %}Mark complete{% endif %}
                     </a>
                     <a class="btn btn-sm btn-outline-primary" href="{% url 'edit' task.id %}">Edit</a>
+                    <form method="post" action="{% url 'delete' task.id %}" onsubmit="return confirm('Delete this task?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                    </form>
                 </div>
             </li>
         {% empty %}

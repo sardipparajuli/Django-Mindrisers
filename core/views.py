@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_POST
 from .models import Todolist
 
 
@@ -53,3 +54,10 @@ def edit(request, id):
 
     context = {'task': task}
     return render(request, 'core/edit.html', context)
+
+
+@require_POST
+def delete(request, id):
+    task = get_object_or_404(Todolist, id=id)
+    task.delete()
+    return redirect('todolist')

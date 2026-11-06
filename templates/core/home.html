@@ -3,6 +3,15 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <h1>It works, bro 🎉</h1>
-    <p>Welcome to my first Django site.</p>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-3">
+            <h1 class="display-5 fw-bold">Welcome to My Todo App</h1>
+            <p class="col-md-8 fs-5">
+                A small Django project where I can add tasks, edit them,
+                and mark them as complete.
+            </p>
+            <a class="btn btn-primary btn-lg" href="{% url 'todolist' %}">View Tasks</a>
+            <a class="btn btn-outline-secondary btn-lg" href="{% url 'create' %}">Add a Task</a>
+        </div>
+    </div>
 {% endblock %}
