@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+    <h1>My Tasks</h1>
+    <p>Completed: {{ completed }} | Incomplete: {{ incomplete }}</p>
+
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <strong>{{ task.title }}</strong>
+                {% if task.is_completed %}(done){% else %}(pending){% endif %}
+                <br>
+                {{ task.description|default:"No description" }}
+            </li>
+        {% empty %}
+            <li>No tasks yet. <a href="{% url 'create' %}">Add one</a>.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
